@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    internal class Categoria
+    public class Categoria : NamedEntity
     {
+        public string Descripcion { get; set; }
+        public List<Prenda> Prendas { get; set; }
+
+        public Categoria()
+        {
+            Prendas = new List<Prenda>();
+        }
     }
 }

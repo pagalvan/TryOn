@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    internal class NamedEntity
+    public abstract class NamedEntity : BaseEntity
     {
+        public string Nombre { get; set; }
     }
+
 }

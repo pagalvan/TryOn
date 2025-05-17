@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    internal class Medida
+    public class Medida : BaseEntity
     {
+        public string Tipo { get; set; }
+        public double Valor { get; set; }
+        public string Unidad { get; set; }
+
     }
 }

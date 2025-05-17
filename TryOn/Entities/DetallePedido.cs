@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    internal class DetallePedido
+    public class DetallePedido : BaseEntity
     {
+        public Pedido Pedido { get; set; }
+        public Prenda Prenda { get; set; }
+        public int Cantidad { get; set; }
+        public double Subtotal => Cantidad * (Prenda?.Precio ?? 0);
     }
+
 }

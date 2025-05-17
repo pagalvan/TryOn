@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    internal class Persona
+    public abstract class Persona : BaseEntity
     {
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Telefono { get; set; }
+        public abstract string NombreCompleto();
     }
+
 }

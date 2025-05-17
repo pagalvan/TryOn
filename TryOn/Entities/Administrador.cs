@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    internal class Administrador
+    public class Administrador : Usuario
     {
+        public string Cargo { get; set; }
+        public string Departamento { get; set; }
     }
+
 }

@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    internal class ProbadorVirtual
+    public class ProbadorVirtual
     {
+        public Cliente Cliente { get; set; }
+        public Prenda PrendaSeleccionada { get; set; }
+        public List<PruebaPrenda> HistorialPruebas { get; set; } = new List<PruebaPrenda>();
     }
+
+    public class PruebaPrenda : BaseEntity
+    {
+        public Cliente Cliente { get; set; }
+        public Prenda Prenda { get; set; }
+        public DateTime Fecha { get; set; }
+        public string Comentarios { get; set; }
+    }
+
+
 }

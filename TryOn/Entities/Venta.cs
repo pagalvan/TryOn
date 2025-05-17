@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    internal class Venta
+    public class Venta : BaseEntity
     {
+        public Pedido Pedido { get; set; }
+        public DateTime FechaVenta { get; set; }
+        public string MetodoPago { get; set; }
+        public double MontoTotal { get; set; }
     }
+
 }
