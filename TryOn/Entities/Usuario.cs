@@ -10,10 +10,5 @@ namespace Entities
     {
         public string Email { get; set; }
         public string Contrasena { get; set; }
-        public override string NombreCompleto()
-        {
-            return $"{Nombre} {Apellido}";
-        }
     }
-
-}
+}                                                           

@@ -11,6 +11,7 @@ namespace Entities
         public string Categoria { get; set; }
         public string Valor { get; set; }
         public int Prioridad { get; set; }
+        public Cliente Cliente { get; set; }
     }
 
 }

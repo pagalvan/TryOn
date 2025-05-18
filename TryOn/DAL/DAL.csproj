@@ -93,11 +93,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministradorRepository.cs" />
     <Compile Include="BaseDatos.cs" />
+    <Compile Include="CarritoRepository.cs" />
     <Compile Include="CategoriaRepository.cs" />
+    <Compile Include="ClienteRepository.cs" />
+    <Compile Include="DetallePedidoRepository.cs" />
+    <Compile Include="InventarioRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="MedidaRepository.cs" />
+    <Compile Include="PedidoRepository.cs" />
+    <Compile Include="PreferenciaRepository.cs" />
     <Compile Include="PrendaRepository.cs" />
+    <Compile Include="PromocionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReporteRepository.cs" />
+    <Compile Include="UsuarioRepository.cs" />
+    <Compile Include="VentaRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

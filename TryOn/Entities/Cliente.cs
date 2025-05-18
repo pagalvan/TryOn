@@ -9,11 +9,13 @@ namespace Entities
     public class Cliente : Persona
     {
         public string Direccion { get; set; }
-        public List<Medida> Medidas { get; set; } = new List<Medida>();
-        public List<Preferencia> Preferencias { get; set; } = new List<Preferencia>();
-        public override string NombreCompleto()
+        public List<Medida> Medidas { get; set; }
+        public List<Preferencia> Preferencias { get; set; }
+
+        public Cliente()
         {
-            return $"{Nombre} {Apellido}";
+            Medidas = new List<Medida>();
+            Preferencias = new List<Preferencia>();
         }
     }
 }

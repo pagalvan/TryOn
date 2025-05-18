@@ -11,6 +11,7 @@ namespace Entities
         public string Tipo { get; set; }
         public double Valor { get; set; }
         public string Unidad { get; set; }
+        public Cliente Cliente { get; set; }                
 
     }
 }
