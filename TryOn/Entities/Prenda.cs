@@ -14,10 +14,10 @@ namespace Entities
         public string Talla { get; set; }
         public string Color { get; set; }
         public double Precio { get; set; }
-        public double PrecioDescuento { get; set; }
+        public double? PrecioDescuento { get; set; }
         public int Stock { get; set; }
         public string Imagen { get; set; }
-        public List<string> ImagenesAdicionales { get; set; } = new();
+        public List<string> ImagenesAdicionales { get; set; } = new List<string>();
         public string Modelo3D { get; set; }
         public string Descripcion { get; set; }
         public Categoria Categoria { get; set; }
