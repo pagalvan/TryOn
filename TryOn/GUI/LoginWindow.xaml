@@ -1,0 +1,240 @@
+﻿<Window x:Class="GUI.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI"
+        mc:Ignorable="d"
+        Title="STREET WEAR - Acceso" Height="500" Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="CanMinimize">
+
+    <Window.Resources>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="0,5,0,15"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+        </Style>
+
+        <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="0,5,0,15"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#632024"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="Margin" Value="0,20,0,0"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5" 
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#6F4D38"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#4A1A1D"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LinkStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#632024"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+        </Style>
+    </Window.Resources>
+
+    <Border CornerRadius="0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Panel izquierdo - Color vinotinto -->
+            <Grid Grid.Column="0" Background="#632024">
+                <!-- Aquí puedes agregar un logo o imagen si lo deseas -->
+            </Grid>
+
+            <!-- Panel derecho - Formulario -->
+            <Grid Grid.Column="1" Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Botones de control de ventana -->
+                <StackPanel Grid.Row="0" 
+                            Orientation="Horizontal" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Top" 
+                            Margin="0,5,5,0">
+                    <Button x:Name="MinimizeButton" 
+                            Content="—" 
+                            Width="30" 
+                            Height="30" 
+                            Background="Transparent" 
+                            Foreground="#333333" 
+                            BorderThickness="0" 
+                            Click="MinimizeButton_Click"/>                             
+                    <Button x:Name="CloseButton" 
+                            Content="✕" 
+                            Width="30" 
+                            Height="30" 
+                            Background="Transparent" 
+                            Foreground="#333333" 
+                            BorderThickness="0" 
+                            Click="CloseButton_Click"/>
+                </StackPanel>
+
+                <!-- Formulario de Login -->
+                <StackPanel Grid.Row="1" 
+                            Width="350" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center"
+                            x:Name="LoginPanel">
+                    <TextBlock Text="Welcome back" 
+                               FontSize="28" 
+                               FontWeight="Bold" 
+                               Foreground="#333333" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,0,0,40"/>
+
+                    <Label Content="Email" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="EmailTextBox" 
+                             Style="{StaticResource TextBoxStyle}"
+                             Text="m@example.com"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" 
+                               Content="Password" 
+                               Style="{StaticResource LabelStyle}"/>
+
+                        <TextBlock Grid.Column="1" 
+                                   Text="Forgot your password?" 
+                                   Style="{StaticResource LinkStyle}"
+                                   VerticalAlignment="Center"
+                                   MouseDown="ForgotPassword_Click"/>
+                    </Grid>
+
+                    <PasswordBox x:Name="PasswordBox" 
+                                 Style="{StaticResource PasswordBoxStyle}"/>
+
+                    <Button x:Name="LoginButton" 
+                            Content="Login" 
+                            Style="{StaticResource ButtonStyle}"
+                            Click="LoginButton_Click"/>
+
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center" 
+                                Margin="0,30,0,0">
+                        <TextBlock Text="Don't have an account? " 
+                                   Foreground="#333333"/>
+                        <TextBlock Text="Sign up" 
+                                   Style="{StaticResource LinkStyle}"
+                                   MouseDown="SignUp_Click"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Formulario de Registro -->
+                <StackPanel Grid.Row="1" 
+                            Width="350" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center"
+                            x:Name="RegisterPanel"
+                            Visibility="Collapsed">
+                    <TextBlock Text="Create an account" 
+                               FontSize="28" 
+                               FontWeight="Bold" 
+                               Foreground="#333333" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,0,0,30"/>
+
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center" 
+                                Margin="0,0,0,20">
+                        <RadioButton x:Name="ClienteRadioButton" 
+                                     Content="Cliente" 
+                                     IsChecked="True" 
+                                     Margin="0,0,20,0"
+                                     Checked="TipoUsuario_Checked"/>
+                        <RadioButton x:Name="AdminRadioButton" 
+                                     Content="Administrador" 
+                                     Checked="TipoUsuario_Checked"/>
+                    </StackPanel>
+
+                    <Label Content="Nombre" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="NombreTextBox" Style="{StaticResource TextBoxStyle}"/>
+
+                    <Label Content="Apellido" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="ApellidoTextBox" Style="{StaticResource TextBoxStyle}"/>
+
+                    <Label Content="Email" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="RegisterEmailTextBox" Style="{StaticResource TextBoxStyle}"/>
+
+                    <Label Content="Password" Style="{StaticResource LabelStyle}"/>
+                    <PasswordBox x:Name="RegisterPasswordBox" Style="{StaticResource PasswordBoxStyle}"/>
+
+                    <Label Content="Confirm Password" Style="{StaticResource LabelStyle}"/>
+                    <PasswordBox x:Name="ConfirmPasswordBox" Style="{StaticResource PasswordBoxStyle}"/>
+
+                    <Button x:Name="RegisterButton" 
+                            Content="Sign Up" 
+                            Style="{StaticResource ButtonStyle}"
+                            Click="RegisterButton_Click"/>
+
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center" 
+                                Margin="0,30,0,0">
+                        <TextBlock Text="Already have an account? " 
+                                   Foreground="#333333"/>
+                        <TextBlock Text="Sign in" 
+                                   Style="{StaticResource LinkStyle}"
+                                   MouseDown="SignIn_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

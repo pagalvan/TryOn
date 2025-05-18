@@ -52,10 +52,8 @@
     <Compile Include="PedidoService.cs" />
     <Compile Include="PreferenciaService.cs" />
     <Compile Include="PrendaService.cs" />
-    <Compile Include="ProbadorVirtualService.cs" />
     <Compile Include="PromocionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PruebaPrendaService.cs" />
     <Compile Include="ReporteService.cs" />
     <Compile Include="UsuarioService.cs" />
     <Compile Include="VentaService.cs" />

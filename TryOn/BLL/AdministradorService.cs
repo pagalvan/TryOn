@@ -2,6 +2,7 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace BLL
@@ -34,6 +35,10 @@ namespace BLL
                 {
                     return $"Ya existe un usuario con el email {administrador.Email}";
                 }
+
+                // Establecer valores por defecto
+                administrador.FechaRegistro = DateTime.Now;
+                administrador.Activo = true;
 
                 // Guardar el administrador
                 return _administradorRepository.Guardar(administrador);
@@ -120,6 +125,9 @@ namespace BLL
                     return $"El email {administrador.Email} ya está en uso por otro usuario";
                 }
 
+                // Mantener la fecha de registro original
+                administrador.FechaRegistro = administradorExistente.FechaRegistro;
+
                 // Modificar el administrador
                 return _administradorRepository.Modificar(administrador);
             }
@@ -151,6 +159,28 @@ namespace BLL
             catch (Exception ex)
             {
                 return $"Error al eliminar el administrador: {ex.Message}";
+            }
+        }
+
+        public Administrador IniciarSesion(string email, string password)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(email))
+                    throw new ArgumentException("El email no puede estar vacío");
+
+                if (string.IsNullOrEmpty(password))
+                    throw new ArgumentException("La contraseña no puede estar vacía");
+
+                var administradores = _administradorRepository.Consultar();
+                return administradores.FirstOrDefault(a =>
+                    a.Email.Equals(email, StringComparison.OrdinalIgnoreCase) &&
+                    a.Password == password &&
+                    a.Activo);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al iniciar sesión: {ex.Message}");
             }
         }
 
@@ -205,12 +235,12 @@ namespace BLL
                 return "El formato del email no es válido";
             }
 
-            if (string.IsNullOrEmpty(administrador.Contrasena))
+            if (string.IsNullOrEmpty(administrador.Password))
             {
                 return "La contraseña no puede estar vacía";
             }
 
-            if (administrador.Contrasena.Length < 6)
+            if (administrador.Password.Length < 6)
             {
                 return "La contraseña debe tener al menos 6 caracteres";
             }

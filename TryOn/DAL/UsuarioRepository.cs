@@ -27,7 +27,7 @@ namespace DAL
                     comando.Parameters.Add("@apellido", NpgsqlDbType.Varchar).Value = usuario.Apellido;
                     comando.Parameters.Add("@telefono", NpgsqlDbType.Varchar).Value = usuario.Telefono ?? (object)DBNull.Value;
                     comando.Parameters.Add("@email", NpgsqlDbType.Varchar).Value = usuario.Email;
-                    comando.Parameters.Add("@contrasena", NpgsqlDbType.Varchar).Value = HashPassword(usuario.Contrasena);
+                    comando.Parameters.Add("@contrasena", NpgsqlDbType.Varchar).Value = HashPassword(usuario.Password);
 
                     usuario.Id = Convert.ToInt32(comando.ExecuteScalar());
                     return $"Usuario guardado con ID: {usuario.Id}";
@@ -83,7 +83,7 @@ namespace DAL
                                 Apellido = reader.GetString(2),
                                 Telefono = reader.IsDBNull(3) ? null : reader.GetString(3),
                                 Email = reader.GetString(4),
-                                Contrasena = "********" // No devolvemos la contraseña real
+                                Password = "********" // No devolvemos la contraseña real
                             };
                             usuarios.Add(usuario);
                         }
@@ -125,11 +125,11 @@ namespace DAL
                     int filasAfectadas = comando.ExecuteNonQuery();
 
                     // Si se proporcionó una nueva contraseña, actualizarla
-                    if (!string.IsNullOrEmpty(usuario.Contrasena) && usuario.Contrasena != "********")
+                    if (!string.IsNullOrEmpty(usuario.Password) && usuario.Password != "********")
                     {
                         comando.Parameters.Clear();
                         comando.CommandText = "UPDATE usuarios SET contrasena = @contrasena WHERE id = @id";
-                        comando.Parameters.Add("@contrasena", NpgsqlDbType.Varchar).Value = HashPassword(usuario.Contrasena);
+                        comando.Parameters.Add("@contrasena", NpgsqlDbType.Varchar).Value = HashPassword(usuario.Password);
                         comando.Parameters.Add("@id", NpgsqlDbType.Integer).Value = usuario.Id;
 
                         comando.ExecuteNonQuery();
@@ -223,7 +223,7 @@ namespace DAL
                                 Apellido = reader.GetString(2),
                                 Telefono = reader.IsDBNull(3) ? null : reader.GetString(3),
                                 Email = reader.GetString(4),
-                                Contrasena = "********" // No devolvemos la contraseña real
+                                Password = "********" // No devolvemos la contraseña real
                             };
                         }
                     }
@@ -266,7 +266,7 @@ namespace DAL
                                 Apellido = reader.GetString(2),
                                 Telefono = reader.IsDBNull(3) ? null : reader.GetString(3),
                                 Email = reader.GetString(4),
-                                Contrasena = "********" // No devolvemos la contraseña real
+                                Password = "********" // No devolvemos la contraseña real
                             };
                         }
                     }

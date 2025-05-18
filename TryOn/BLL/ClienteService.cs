@@ -2,6 +2,7 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BLL
 {
@@ -28,6 +29,10 @@ namespace BLL
                 {
                     return validacion;
                 }
+
+                // Establecer valores por defecto
+                cliente.FechaRegistro = DateTime.Now;
+                cliente.Activo = true;
 
                 // Guardar el cliente
                 return _clienteRepository.Guardar(cliente);
@@ -90,6 +95,9 @@ namespace BLL
                     return $"No se encontró un cliente con ID {cliente.Id}";
                 }
 
+                // Mantener la fecha de registro original
+                cliente.FechaRegistro = clienteExistente.FechaRegistro;
+
                 // Modificar el cliente
                 return _clienteRepository.Modificar(cliente);
             }
@@ -121,6 +129,28 @@ namespace BLL
             catch (Exception ex)
             {
                 return $"Error al eliminar el cliente: {ex.Message}";
+            }
+        }
+
+        public Cliente IniciarSesion(string email, string password)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(email))
+                    throw new ArgumentException("El email no puede estar vacío");
+
+                if (string.IsNullOrEmpty(password))
+                    throw new ArgumentException("La contraseña no puede estar vacía");
+
+                var clientes = _clienteRepository.Consultar();
+                return clientes.FirstOrDefault(c =>
+                    c.Email.Equals(email, StringComparison.OrdinalIgnoreCase) &&
+                    c.Password == password &&
+                    c.Activo);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al iniciar sesión: {ex.Message}");
             }
         }
 
@@ -247,6 +277,16 @@ namespace BLL
             if (string.IsNullOrEmpty(cliente.Apellido))
             {
                 return "El apellido no puede estar vacío";
+            }
+
+            if (string.IsNullOrEmpty(cliente.Email))
+            {
+                return "El email no puede estar vacío";
+            }
+
+            if (string.IsNullOrEmpty(cliente.Password))
+            {
+                return "La contraseña no puede estar vacía";
             }
 
             return null;

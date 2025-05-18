@@ -239,12 +239,12 @@ namespace BLL
                 return "El formato del email no es válido";
             }
 
-            if (string.IsNullOrEmpty(usuario.Contrasena))
+            if (string.IsNullOrEmpty(usuario.Password))
             {
                 return "La contraseña no puede estar vacía";
             }
 
-            if (usuario.Contrasena.Length < 6)
+            if (usuario.Password.Length < 6)
             {
                 return "La contraseña debe tener al menos 6 caracteres";
             }
