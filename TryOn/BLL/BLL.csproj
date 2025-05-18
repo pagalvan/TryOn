@@ -42,11 +42,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministradorService.cs" />
+    <Compile Include="CarritoCompraService.cs" />
+    <Compile Include="CategoriaService.cs" />
     <Compile Include="ClienteService.cs" />
+    <Compile Include="DetallePedidoService.cs" />
     <Compile Include="InventarioService.cs" />
     <Compile Include="ISerivice.cs" />
+    <Compile Include="MedidaService.cs" />
     <Compile Include="PedidoService.cs" />
+    <Compile Include="PreferenciaService.cs" />
+    <Compile Include="PrendaService.cs" />
+    <Compile Include="ProbadorVirtualService.cs" />
+    <Compile Include="PromocionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PruebaPrendaService.cs" />
     <Compile Include="ReporteService.cs" />
     <Compile Include="UsuarioService.cs" />
     <Compile Include="VentaService.cs" />
