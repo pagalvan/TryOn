@@ -223,7 +223,7 @@
                                    Foreground="#333333"/>
                         <TextBlock Text="Sign in" 
                                    Style="{StaticResource LinkStyle}"
-                                   MouseDown="SignIn_Click"/>
+                                   MouseDown="SignIn_Click" Cursor="Hand"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
