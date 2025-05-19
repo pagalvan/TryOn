@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class Cliente : Persona
+    public class Cliente : Usuario
     {
         public string Direccion { get; set; }
         public List<Medida> Medidas { get; set; }
         public List<Preferencia> Preferencias { get; set; }
+
+        
 
         public Cliente()
         {
