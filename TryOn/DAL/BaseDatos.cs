@@ -9,7 +9,7 @@ namespace DAL
 {
     public class BaseDatos
     {
-        string cadenaConexion = "Host=192.168.80.27;Port=5432;Username=postgres;Password=upctryon;Database=TryOnDB";
+        string cadenaConexion = "Host=192.168.80.27;Port=5432;Username=postgres;Password=upctryon;Database=postgres";
         protected NpgsqlConnection conexion;
 
         public BaseDatos()
@@ -18,16 +18,18 @@ namespace DAL
             conexion.ConnectionString = cadenaConexion;
         }
 
-        public string AbrirConexion()
+        public void AbrirConexion()
         {
-            try
+            if (conexion.State != System.Data.ConnectionState.Open)
             {
-                conexion.Open();
-                return conexion.State.ToString();
-            }
-            catch (Exception ex)
-            {
-                return "Error al abrir la conexión: " + ex.Message;
+                try
+                {
+                    conexion.Open();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("No se pudo abrir la conexión: " + ex.Message);
+                }
             }
         }
 

@@ -194,14 +194,6 @@
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Center" 
                                 Margin="0,0,0,20">
-                        <RadioButton x:Name="ClienteRadioButton" 
-                                     Content="Cliente" 
-                                     IsChecked="True" 
-                                     Margin="0,0,20,0"
-                                     Checked="TipoUsuario_Checked"/>
-                        <RadioButton x:Name="AdminRadioButton" 
-                                     Content="Administrador" 
-                                     Checked="TipoUsuario_Checked"/>
                     </StackPanel>
 
                     <Label Content="Nombre" Style="{StaticResource LabelStyle}"/>

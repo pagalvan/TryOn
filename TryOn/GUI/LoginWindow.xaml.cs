@@ -63,16 +63,16 @@ namespace GUI
                 "Información", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void TipoUsuario_Checked(object sender, RoutedEventArgs e)
-        {
-            // Ajustar la interfaz según el tipo de usuario seleccionado
-            if (AdminRadioButton.IsChecked == true && !_isSignIn)
-            {
-                MessageBox.Show("El registro de administradores solo puede ser realizado por otro administrador.",
-                    "Información", MessageBoxButton.OK, MessageBoxImage.Information);
-                ClienteRadioButton.IsChecked = true;
-            }
-        }
+        //private void TipoUsuario_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    // Ajustar la interfaz según el tipo de usuario seleccionado
+        //    if (AdminRadioButton.IsChecked == true && !_isSignIn)
+        //    {
+        //        MessageBox.Show("El registro de administradores solo puede ser realizado por otro administrador.",
+        //            "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        ClienteRadioButton.IsChecked = true;
+        //    }
+        //}
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
@@ -155,42 +155,33 @@ namespace GUI
                     return;
                 }
 
-                // Registrar según el tipo de usuario
-                if (ClienteRadioButton.IsChecked == true)
+                Cliente nuevoCliente = new Cliente
                 {
-                    Cliente nuevoCliente = new Cliente
-                    {
-                        Nombre = nombre,
-                        Apellido = apellido,
-                        Email = email,
-                        Password = password,
-                        FechaRegistro = DateTime.Now,
-                        Activo = true
-                    };
+                    Nombre = nombre,
+                    Apellido = apellido,
+                    Email = email,
+                    Password = password,
+                    FechaRegistro = DateTime.Now,
+                    Activo = true
+                };
 
-                    string resultado = _clienteService.Guardar(nuevoCliente);
-                    if (resultado.StartsWith("Cliente guardado"))
-                    {
-                        MessageBox.Show("Registro exitoso. Ahora puede iniciar sesión.",
-                            "Registro completado", MessageBoxButton.OK, MessageBoxImage.Information);
+                string resultado = _clienteService.Guardar(nuevoCliente);
+                if (resultado.StartsWith("Cliente guardado"))
+                {
+                    MessageBox.Show("Registro exitoso. Ahora puede iniciar sesión.",
+                        "Registro completado", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        // Cambiar a la vista de inicio de sesión
-                        _isSignIn = true;
-                        ConfigurarVentana();
+                    // Cambiar a la vista de inicio de sesión
+                    _isSignIn = true;
+                    ConfigurarVentana();
 
-                        // Pre-llenar el campo de correo electrónico
-                        EmailTextBox.Text = email;
-                    }
-                    else
-                    {
-                        MessageBox.Show(resultado,
-                            "Error de registro", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                    // Pre-llenar el campo de correo electrónico
+                    EmailTextBox.Text = email;
                 }
                 else
                 {
-                    MessageBox.Show("El registro de administradores solo puede ser realizado por otro administrador.",
-                        "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(resultado,
+                        "Error de registro", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
@@ -199,6 +190,7 @@ namespace GUI
                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {

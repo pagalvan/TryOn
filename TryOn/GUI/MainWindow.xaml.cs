@@ -24,7 +24,7 @@ namespace GUI
         private void SignIn_Click(object sender, RoutedEventArgs e)
         {
             // Crear y mostrar la ventana de login en modo inicio de sesión
-            LoginWindow loginWindow = new LoginWindow(isSignIn: true);
+            LoginWindow loginWindow = new LoginWindow();
             this.Hide();
             loginWindow.ShowDialog();
             this.Show();
@@ -33,7 +33,7 @@ namespace GUI
         private void SignUp_Click(object sender, RoutedEventArgs e)
         {
             // Crear y mostrar la ventana de login en modo registro
-            LoginWindow loginWindow = new LoginWindow(isSignIn: false);
+            LoginWindow loginWindow = new LoginWindow();
             this.Hide();
             loginWindow.ShowDialog();
             this.Show();
@@ -51,12 +51,12 @@ namespace GUI
             // this.Show();
         }
 
-        private void Minimize_Click(object sender, RoutedEventArgs e)
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
 
-        private void Close_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

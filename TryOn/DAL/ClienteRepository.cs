@@ -25,14 +25,30 @@ namespace DAL
                 {
                     AbrirConexion();
                     comando.Connection = conexion;
+
+                    // Primero insertar en la tabla personas
                     comando.CommandText = @"
-                        INSERT INTO clientes (nombre, apellido, telefono, direccion)
-                        VALUES (@nombre, @apellido, @telefono, @direccion)
-                        RETURNING id";
+                INSERT INTO personas (nombre, apellido, telefono)
+                VALUES (@nombre, @apellido, @telefono)
+                RETURNING id";
 
                     comando.Parameters.Add("@nombre", NpgsqlDbType.Varchar).Value = cliente.Nombre;
                     comando.Parameters.Add("@apellido", NpgsqlDbType.Varchar).Value = cliente.Apellido;
                     comando.Parameters.Add("@telefono", NpgsqlDbType.Varchar).Value = cliente.Telefono ?? (object)DBNull.Value;
+
+                    // Obtener el ID de la persona insertada
+                    int personaId = Convert.ToInt32(comando.ExecuteScalar());
+
+                    // Limpiar parámetros para la siguiente consulta
+                    comando.Parameters.Clear();
+
+                    // Luego insertar en la tabla clientes
+                    comando.CommandText = @"
+                INSERT INTO clientes (persona_id, direccion)
+                VALUES (@persona_id, @direccion)
+                RETURNING id";
+
+                    comando.Parameters.Add("@persona_id", NpgsqlDbType.Integer).Value = personaId;
                     comando.Parameters.Add("@direccion", NpgsqlDbType.Text).Value = cliente.Direccion ?? (object)DBNull.Value;
 
                     cliente.Id = Convert.ToInt32(comando.ExecuteScalar());
